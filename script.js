@@ -31,7 +31,7 @@ let isGameOver = false;
 
 // Theme Handling
 const themeSelect = document.getElementById('theme-select');
-const savedTheme = localStorage.getItem('snakeTheme') || 'neon';
+const savedTheme = localStorage.getItem('snakeTheme') || 'retro';
 
 function setTheme(theme) {
     document.body.className = ''; // Clear existing themes
@@ -265,8 +265,8 @@ document.addEventListener('touchstart', (e) => {
 }, { passive: false });
 
 document.addEventListener('touchend', (e) => {
-    // Allow interactions with the theme selector
-    if (e.target.tagName === 'SELECT' || e.target.tagName === 'OPTION' || e.target.closest('.theme-selector')) {
+    // Allow interactions with the theme selector and links
+    if (e.target.tagName === 'SELECT' || e.target.tagName === 'OPTION' || e.target.closest('.theme-selector') || e.target.tagName === 'A' || e.target.closest('.author')) {
         return;
     }
 

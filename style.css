@@ -168,6 +168,20 @@ h1 {
     z-index: 1000;
 }
 
+.author a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+    pointer-events: all;
+    /* Re-enable clicks for the link */
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.author a:hover {
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
+
 
 
 .theme-selector {
