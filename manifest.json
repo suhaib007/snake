@@ -4,7 +4,6 @@
   "description": "A glowing neon snake game.",
   "start_url": "./index.html",
   "id": "./index.html",
-  "scope": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0a0a0a",
