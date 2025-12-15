@@ -184,7 +184,28 @@ function gameOver() {
     ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2);
 
     ctx.font = '20px Outfit';
-    ctx.fillText('Press Space to Restart', canvas.width / 2, canvas.height / 2 + 40);
+    // Check if mobile/touch
+    const isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const restartText = isMobile ? 'Tap to Restart' : 'Press Space to Restart';
+    ctx.fillText(restartText, canvas.width / 2, canvas.height / 2 + 40);
+}
+
+function showStartScreen() {
+    isGameRunning = false;
+    isGameOver = false;
+
+    // Draw snake & food static
+    drawGame();
+
+    // Draw Start Text overlay
+    ctx.fillStyle = 'white';
+    ctx.font = '34px Outfit';
+    ctx.textAlign = 'center';
+
+    const isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const startText = isMobile ? 'Tap to Start' : 'Press Space to Start';
+
+    ctx.fillText(startText, canvas.width / 2, canvas.height / 2);
 }
 
 function resetGame() {
@@ -226,7 +247,7 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
     }
 
-    if (e.key === ' ' && !isGameRunning && isGameOver) {
+    if (e.key === ' ' && !isGameRunning) {
         resetGame();
         return;
     }
@@ -280,6 +301,12 @@ function handleSwipe(startX, startY, endX, endY) {
     const outputX = endX - startX;
     const outputY = endY - startY;
 
+    // Tap to start/restart logic
+    if (Math.abs(outputX) < 10 && Math.abs(outputY) < 10 && !isGameRunning) {
+        resetGame();
+        return;
+    }
+
     // Minimum threshold to consider it a swipe
     if (Math.abs(outputX) < 30 && Math.abs(outputY) < 30) return;
 
@@ -325,17 +352,13 @@ function handleDirection(direction) {
 
 
 // Start game initially
+// Start game initially
 window.addEventListener('load', () => {
-    console.log('Window loaded, starting game...');
-    resetGame();
-
-    // Safety check loop to ensure visibility
-    setTimeout(() => {
-        if (!isGameRunning) {
-            console.log('Force restart check...');
-            resetGame();
-        }
-    }, 500);
+    console.log('Window loaded, showing start screen...');
+    // Initialize vars without starting loop
+    snake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
+    generateFood();
+    showStartScreen();
 });
 
 // Debug helper
