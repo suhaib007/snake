@@ -12,26 +12,26 @@
     {
       "src": "icon-192.png",
       "sizes": "1024x1024",
-      "type": "image/jpeg"
+      "type": "image/png"
     },
     {
       "src": "icon-512.png",
       "sizes": "1024x1024",
-      "type": "image/jpeg"
+      "type": "image/png"
     }
   ],
   "screenshots": [
     {
       "src": "icon-512.png",
       "sizes": "1024x1024",
-      "type": "image/jpeg",
+      "type": "image/png",
       "form_factor": "wide",
       "label": "Game Screen"
     },
     {
       "src": "icon-512.png",
       "sizes": "1024x1024",
-      "type": "image/jpeg",
+      "type": "image/png",
       "form_factor": "narrow",
       "label": "Game Screen Mobile"
     }
