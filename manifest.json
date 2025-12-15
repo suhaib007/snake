@@ -3,19 +3,37 @@
   "short_name": "Snake",
   "description": "A glowing neon snake game.",
   "start_url": "./index.html",
+  "id": "./index.html",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#0a0a0a",
   "theme_color": "#0a0a0a",
   "icons": [
     {
       "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "sizes": "1024x1024",
+      "type": "image/jpeg"
     },
     {
       "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "sizes": "1024x1024",
+      "type": "image/jpeg"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "icon-512.png",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Game Screen"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Game Screen Mobile"
     }
   ]
 }
