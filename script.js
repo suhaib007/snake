@@ -29,6 +29,31 @@ let gameLoop;
 let isGameRunning = false;
 let isGameOver = false;
 
+// Audio Context
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playEatSound() {
+    if (!audioCtx) return;
+
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.type = 'sine';
+    // "Bloop" sound: frequency sweep up
+    oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.1);
+
+    // Envelope: quick attack and decay
+    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.1);
+}
+
 // Theme Handling
 const themeSelect = document.getElementById('theme-select');
 const savedTheme = localStorage.getItem('snakeTheme') || 'retro';
@@ -146,6 +171,7 @@ function moveSnake() {
     // Check if ate food
     if (head.x === food.x && head.y === food.y) {
         score += 10;
+        playEatSound(); // Play sound effect
         scoreElement.textContent = score;
         if (score > highScore) {
             highScore = score;
@@ -209,6 +235,11 @@ function showStartScreen() {
 }
 
 function resetGame() {
+    // Resume audio context on user interaction
+    if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+
     snake = [
         { x: 10, y: 10 },
         { x: 9, y: 10 },
